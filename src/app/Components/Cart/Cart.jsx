@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../../../features/Slices/cartSlice";
 
-const Cart = (openModal, setOpen) => {
+const Cart = ({open, setOpen}) => {
     const cart = useSelector((state)=> state.cart.cart)
     const totalPrice = useSelector((state)=> state.cart.totalPrice)
     const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const Cart = (openModal, setOpen) => {
     <div className="cartContainer">
           {cart.length > 0 ? (
               <Fragment>
-                  <Dialog open={openModal} handler={() => setOpen(false)}>
+                  <Dialog open={open} handler={() => setOpen(false)}>
                       <DialogHeader> Cart Items </DialogHeader>
                       <DialogBody divider className="flex flex-col justify-center items-start">
                           {cart && cart.map((item,index)=> {
@@ -47,11 +47,11 @@ const Cart = (openModal, setOpen) => {
 
                                     <p className="text-black text-sm font-inter tracking-normal leading-none pt-2" >
                                       Selected Color:{" "}
-                                      <span className="ml-2 rounded-full px-2" style={{ backgroudColor: item.color }}></span>
+                                      <span className="ml-2 rounded-full px-2" style={{ backgroundColor: item.color }}></span>
                                     </p>
 
                                     <p className="text-black text-sm font-inter tracking-normal leading-none pt-2" >
-                                      Amount:{" "}
+                                      Quantity:{" "}
                                       <span className="ml-2">{item.amount}</span>
                                     </p>
 
@@ -65,10 +65,6 @@ const Cart = (openModal, setOpen) => {
                                       <span className="ml-2">{item.totalPrice}</span>
                                     </p>
 
-                                    <p className="text-black text-sm font-inter tracking-normal leading-none pt-2" >
-                                      Total Amount:{" "}
-                                      <span className="ml-2">{item.totalAmount}</span>
-                                    </p>
 
                                     <div className="pt-4">
                                       <Tooltip content="Remove from the cart" placement="bottom">
@@ -100,7 +96,7 @@ const Cart = (openModal, setOpen) => {
               <Fragment>
                   <Dialog
                     className="border-0 outline-0" 
-                    open={openModal}
+                    open={open}
                     handler={() => setOpen(false)}
                     animate={{
                         mount: {scale:1, y:0},

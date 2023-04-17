@@ -35,7 +35,7 @@ export const cartSlice = createSlice({
                         color: product.color,
                     });
                     state.totalAmount++
-                    state.totalPrice = product.price
+                    state.totalPrice += product.price
                 }
             } catch (error) {
                 console.log(error)
